@@ -1,5 +1,10 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  CSVFile.swift
+//
+//
+//  Created by WeIHa'S on 2024/1/23.
+//
+
 import Foundation
 
 /// Represents a CSV file, encapsulating functionalities for reading from and writing to CSV files.
@@ -36,5 +41,13 @@ public struct CSVFile {
     public func save(to newURL: URL? = nil) throws {
         let result = lines.map(\.rawValue).joined(separator: "\n").appending("\n")
         try result.write(to: newURL ?? fileURL, atomically: true, encoding: .utf8)
+    }
+    
+    /// Accesses individual lines within the `CSVFile` using subscript notation.
+    /// - Parameter index: The index of the line to access.
+    /// - Returns: The `CSVLine` object representing the line at the specified index.
+    public subscript(_ index: Int) -> CSVLine {
+        get { lines[index] }
+        set { lines[index] = newValue }
     }
 }

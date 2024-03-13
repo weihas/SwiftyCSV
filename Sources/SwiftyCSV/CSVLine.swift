@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CSVLine.swift
 //  
 //
 //  Created by WeIHa'S on 2024/1/23.
@@ -33,5 +33,13 @@ public struct CSVLine: RawRepresentable {
     public var rawValue: String {
         // Joins the fields into a CSV-formatted string, quoting and escaping each field as necessary.
         fields.map({$0.asCSVCell}).joined(separator: ",")
+    }
+    
+    /// Accesses individual fields within the `CSVLine` using subscript notation.
+    /// - Parameter index: The index of the field to access.
+    /// - Returns: The string value of the field at the specified index.
+    public subscript(_ index: Int) -> String {
+        get { fields[index] }
+        set { fields[index] = newValue }
     }
 }
