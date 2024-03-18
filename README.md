@@ -10,6 +10,8 @@ To get started, obtain a CSV file from your filesystem:
 
 ```swift
 let file = try CSVFile(filePath: "/Users/weiha/Desktop/file.csv")
+//or Input content String
+let file = CSVFile(rawValue: ".....")
 ```
 
 #### Accessing CSV Data
@@ -28,6 +30,19 @@ Accessing a single field within a line:
 let field = line.fields[0]
 // or
 let field = line[0]
+```
+
+If you want to get the value by column
+
+```swift
+enum CSVColunm: Int, CSVColumnKey {
+    case id = 0
+    case name
+    case type
+    case note = 9
+}
+        
+let line = file[CSVColunm.note]
 ```
 
 #### Manipulating CSV Data
@@ -77,10 +92,14 @@ file.lines = convertLines
 
 #### Saving Changes
 
-Save any modifications made to the CSV file:
+Save any modifications made to the CSV file :
 
 ```swift
-try csvFile.save()
+try file.save(to: URL(string: "/Users/weiha/Desktop/file.csv")!)
+// or
+
+let content = file.rawValue
+//other save function//
 ```
 
 ### Note
